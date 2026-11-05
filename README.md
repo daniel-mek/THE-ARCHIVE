@@ -15,11 +15,11 @@ Open http://localhost:3000. `pnpm build` creates a production build; `pnpm start
 
 ## Visitor paths
 
-- Entrance → Enter the museum → atrium → gallery doors or the bottom navigation.
+- Entrance → click the welcome plinth → atrium → click gallery doorways or exhibits. Museum view has no persistent menus.
 - JobScout → Inspect exhibit → Read the case study.
-- Directory provides keyboard-accessible gallery navigation; Direct access skips the 3D experience.
+- Click the physical visitor-information plinth to open the directory. Tab reveals an accessible directory shortcut. Direct access skips the 3D experience.
 - `/?view=direct` opens the recruiter index; `/?project=jobscout` opens the case study directly.
-- Native dialogs support Escape, focus trapping and focus return. Motion follows the operating system setting and can be disabled in the footer.
+- Native dialogs support Escape, focus trapping and focus return. Motion follows the operating system setting and can be disabled through the visitor-information directory.
 - Canvas failures switch to the readable portfolio index. The index works at narrow widths and exposes the same project content.
 
 ## Edit the collection
