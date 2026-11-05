@@ -13,6 +13,10 @@ pnpm dev
 
 Open http://localhost:3000. `pnpm build` creates a production build; `pnpm start` serves it. `pnpm typecheck` checks TypeScript.
 
+## Immersive controls
+
+Drag empty space to look around; scroll to move closer or farther. Click physical signs and objects to move between camera stations or inspect the work. Camera transitions and ambient motion respect reduced-motion settings. Rooms include procedural stone surfaces, an overhead skylight, gallery lighting, benches, mezzanine rails, and real corridor depth.
+
 ## Visitor paths
 
 - Entrance → click the welcome plinth → atrium → click gallery doorways or exhibits. Museum view has no persistent menus.
