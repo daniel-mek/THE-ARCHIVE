@@ -35,3 +35,7 @@ Drag empty space to look around; scroll to move closer or farther. Click physica
 ## Prototype scope
 
 Systems is intentionally a future-work gallery. JobScout visuals are illustrative, not screenshots of a verified product. Google Fonts are optional; system fonts work offline. This is a local prototype, not a published production website.
+
+## Visual and camera refinement
+
+The camera uses separate frame-rate-independent damping for gallery travel and direct exploration. Wheel input is normalized across pixel, line, and page devices; background-tab time deltas are capped. Drag sensitivity follows viewport size, and pointer capture is released on completion or cancellation. Lighting uses a locally generated studio environment and three active spotlights; no external HDR asset is needed. Run `pnpm test` with Node.js 22.18+ to validate camera response invariants.
