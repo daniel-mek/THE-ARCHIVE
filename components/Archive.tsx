@@ -8,7 +8,7 @@ export default function Archive(){const [room,setRoom]=useState('entrance');cons
 useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');setReduced(media.matches);const change=()=>setReduced(media.matches);media.addEventListener('change',change);const params=new URLSearchParams(location.search);if(params.get('view')==='direct')setDirect(true);if(params.get('project')==='jobscout')setPanel('case');return()=>media.removeEventListener('change',change)},[]);
 const panelOpen=Boolean(panel);
 useEffect(()=>{if(panelOpen){lastFocus.current=document.activeElement as HTMLElement;dialog.current?.showModal()}else {dialog.current?.close();lastFocus.current?.focus()}},[panelOpen]);
-function navigate(next:string){setRoom(next);setPanel(null)}
+function navigate(next:string){setRoom(next);setDirect(false);setPanel(null);const url=new URL(location.href);url.searchParams.delete('view');history.replaceState(null,'',url)}
 function toggleDirect(){const next=!direct;setDirect(next);const url=new URL(location.href);if(next)url.searchParams.set('view','direct');else url.searchParams.delete('view');history.replaceState(null,'',url)}
 const flat=direct||failed;
 return <main className={flat?'archive direct':'archive immersive'}><button className="skip" onClick={()=>setPanel('directory')}>Open accessible museum directory</button>{flat&&<header><a className="brand" href="/" aria-label="The Archive home">THE ARCHIVE<span>Daniel Mekhail / Selected work</span></a><nav aria-label="Primary"><button onClick={toggleDirect}>{direct?'Museum view':'Direct access'} <span>↗</span></button><button onClick={()=>setPanel('directory')} className="directory-button">Directory <span>☰</span></button></nav></header>}
