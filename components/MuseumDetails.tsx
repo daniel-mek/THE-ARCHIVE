@@ -5,8 +5,8 @@ import * as THREE from 'three';
 export function StudioLight() {
   return <Environment resolution={128} frames={1} environmentIntensity={.85}>
     <Lightformer position={[0,8,0]} rotation={[Math.PI/2,0,0]} scale={[12,8,1]} intensity={2.5} color="#f3f8ff" />
-    <Lightformer position={[-8,3,1]} rotation={[0,Math.PI/2,0]} scale={[5,7,1]} intensity={1.5} color="#c6daff" />
-    <Lightformer position={[8,4,-5]} rotation={[0,-Math.PI/2,0]} scale={[4,5,1]} intensity={1} color="#dee9ff" />
+    <Lightformer position={[-8,3,1]} rotation={[0,Math.PI/2,0]} scale={[5,7,1]} intensity={1.5} color="#d1f0e3" />
+    <Lightformer position={[8,4,-5]} rotation={[0,-Math.PI/2,0]} scale={[4,5,1]} intensity={1} color="#e5d8fb" />
   </Environment>;
 }
 export function ArchiveWall() {
@@ -27,8 +27,8 @@ export function ArchiveWall() {
 export function DisplayArt({side}:{side:-1|1}) {
   return <group position={[side*9.72,2.5,-.2]} rotation={[0,-side*Math.PI/2,0]}>
     <RoundedBox args={[2.3,3.2,.12]} radius={.025} castShadow><meshStandardMaterial color="#b8c9e0" metalness={.4} roughness={.4}/></RoundedBox>
-    <mesh position={[0,0,.07]}><planeGeometry args={[2.08,2.98]}/><meshStandardMaterial color="#eef4fc" roughness={.95}/></mesh>
-    {[0,1,2,3,4].map(i=><mesh key={i} position={[(i-2)*.24,0,.12]} rotation={[0,0,-.4]}><torusGeometry args={[.45+i*.07,.018,6,48,Math.PI*1.7]}/><meshStandardMaterial color={i%2?'#168be8':'#b1a5ed'} metalness={.4} roughness={.4}/></mesh>)}
+    <mesh position={[0,0,.07]}><planeGeometry args={[2.08,2.98]}/><meshStandardMaterial color={side===-1?'#d5e9de':'#e7dcef'} roughness={.95}/></mesh>
+    {[0,1,2,3,4].map(i=><mesh key={i} position={[(i-2)*.24,0,.12]} rotation={[0,0,-.4]}><torusGeometry args={[.45+i*.07,.018,6,48,Math.PI*1.7]}/><meshStandardMaterial color={side===-1?(i%2?'#359e82':'#d2a76b'):(i%2?'#9470d2':'#dfae85')} metalness={.4} roughness={.4}/></mesh>)}
   </group>;
 }
 
@@ -36,7 +36,7 @@ export function AcrylicWings() {
   return <group>
     {[-1,1].map(side=><group key={side} position={[side*3.45,2.6,-2.1]}>
       <RoundedBox args={[.72,4.9,.85]} radius={.1} smoothness={3}>
-        <meshPhysicalMaterial color="#bbd9ff" transparent opacity={.16} roughness={.28} metalness={.05} depthWrite={false}/>
+        <meshPhysicalMaterial color={side===-1?'#a9e5cf':'#cfb7f4'} transparent opacity={.16} roughness={.28} metalness={.05} depthWrite={false}/>
       </RoundedBox>
       <mesh position={[side*.37,0,.47]}><boxGeometry args={[.018,4.4,.018]}/><meshStandardMaterial color="#c9e2ff" emissive="#89bdff" emissiveIntensity={.6}/></mesh>
     </group>)}

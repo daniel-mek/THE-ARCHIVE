@@ -6,7 +6,7 @@ export default function ProjectUI({project}:{project:'jobscout'|'music'}) {
  const music=project==='music';
  const labels=music?['Home','Playlists','Login']:['Sign in','Create account'];
  const files=music?['home','playlists','login']:['login.png','signup.png'];
- return <section className="project-ui" aria-label={`${music?'THIS IS MUSIC':'ApplyOS'} actual interface`}>
+ return <section className={`project-ui ${music?'theme-music':'theme-applyos'}`} aria-label={`${music?'THIS IS MUSIC':'ApplyOS'} actual interface`}>
   <div className="ui-heading"><span>INTERFACE GALLERY</span><strong>{music?'THIS IS MUSIC':'ApplyOS'}</strong></div>
   <div className="ui-tabs" role="group" aria-label="Choose interface screen">{labels.map((label,i)=><button key={label} aria-pressed={screen===i} onClick={()=>setScreen(i)}>{label}</button>)}</div>
   <div className="ui-viewport">
