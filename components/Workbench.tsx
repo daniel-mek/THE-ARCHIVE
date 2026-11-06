@@ -42,11 +42,11 @@ export default function Workbench(p:Props){
   const [ready,setReady]=useState(false);
   useEffect(()=>{const frame=requestAnimationFrame(()=>setReady(true));return()=>cancelAnimationFrame(frame)},[]);
   return <group position={[0,0,-2]}>
-  <mesh position={[0,.55,0]} castShadow receiveShadow><cylinderGeometry args={[1.45,1.65,1.1,80]}/><meshStandardMaterial color="#d7e0ec" roughness={.55}/></mesh>
-  <mesh position={[0,.12,0]}><cylinderGeometry args={[1.66,1.66,.08,80]}/><meshStandardMaterial color="#859bb4" metalness={.7} roughness={.3}/></mesh>
-  <mesh position={[0,1.16,0]} castShadow receiveShadow onClick={e=>{if(e.delta<6)p.onApproach()}}><cylinderGeometry args={[2.35,2.35,.18,96]}/><meshPhysicalMaterial color="#f5efe6" roughness={.36} clearcoat={.35}/></mesh>
-  <mesh position={[0,1.258,0]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[2.12,96]}/><meshPhysicalMaterial color="#d3e3e5" metalness={.2} roughness={.27} clearcoat={1}/></mesh>
-  <mesh position={[0,1.265,0]} rotation={[-Math.PI/2,0,0]}><ringGeometry args={[2.13,2.155,96]}/><meshStandardMaterial color="#c7e8ff" emissive="#4ca9ee" emissiveIntensity={.6}/></mesh>
+  <mesh position={[0,.55,0]} castShadow receiveShadow><cylinderGeometry args={[1.45,1.65,1.1,80]}/><meshStandardMaterial color="#714b34" roughness={.55}/></mesh>
+  <mesh position={[0,.12,0]}><cylinderGeometry args={[1.66,1.66,.08,80]}/><meshStandardMaterial color="#b68a4e" metalness={.7} roughness={.3}/></mesh>
+  <mesh position={[0,1.16,0]} castShadow receiveShadow onClick={e=>{if(e.delta<6)p.onApproach()}}><cylinderGeometry args={[2.35,2.35,.18,96]}/><meshPhysicalMaterial color="#dcc198" roughness={.36} clearcoat={.35}/></mesh>
+  <mesh position={[0,1.258,0]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[2.12,96]}/><meshPhysicalMaterial color="#63867a" metalness={.2} roughness={.27} clearcoat={1}/></mesh>
+  <mesh position={[0,1.265,0]} rotation={[-Math.PI/2,0,0]}><ringGeometry args={[2.13,2.155,96]}/><meshStandardMaterial color="#dfbd80" emissive="#e4b76c" emissiveIntensity={.6}/></mesh>
   <Artifact kind={0} at={[-1.15,1.28,-.1]} label="ApplyOS" reduced={p.reduced} onSelect={p.onProject}/>
   <Artifact kind={1} at={[0,1.28,-.55]} label="THIS IS MUSIC" reduced={p.reduced} onSelect={p.onSystems}/>
   <Artifact kind={2} at={[1.15,1.28,-.1]} label="Experiments" reduced={p.reduced} onSelect={p.onExperiments}/>
