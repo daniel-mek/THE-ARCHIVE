@@ -1,11 +1,11 @@
 export const project = {
- title: 'JobScout', category: 'Software / Job discovery', year: 'Exhibit 001',
- summary: 'A workspace for discovering and tracking opportunities.',
- description: 'JobScout contains a Python job watcher and a Cloudflare Worker dashboard, alongside a newer Next.js and FastAPI application. This exhibit presents the original Scout dashboard screenshots included in the repository.',
+ title: 'ApplyOS', category: 'Software / Job discovery', year: 'Exhibit 001',
+ summary: 'Less searching. More possibility.',
+ description: 'ApplyOS brings role discovery, experience-based matching, and application tracking into one workspace. The gallery shows the actual green-and-white interface captured from the deployed application.',
  sections: [
- ['01 / Discovery', 'The repository documents collection of job postings, rule-based scoring, and alerts. The original dashboard presents scored postings and tracking controls.'],
- ['02 / Two generations', 'The legacy Scout interface uses a Cloudflare Worker and KV. The newer ApplyOS application uses Next.js and FastAPI with account, profile, discovery, matching, and application-tracking code. The screenshots above show the legacy interface.'],
+ ['01 / A clear starting point', 'The sign-in and account-creation screens introduce a workspace for finding roles, reviewing experience, and managing applications. These are captures of the actual deployed UI.'],
+ ['02 / The application', 'The application source lives in the JobScout repository under apps/web and apps/api. ApplyOS uses Next.js and FastAPI, with account, profile, discovery, matching, and application-tracking code.'],
  ['03 / Human control', 'The documented workflow keeps the final application submission with the user. No automatic application submission is claimed here.'],
- ['04 / Verification', 'UI screenshots and architecture descriptions come from the JobScout repository at snapshot 2519ea1. The application was not run end-to-end for this exhibit; performance, deployment, and hiring outcomes are unverified.']
+ ['04 / Verification', 'Public sign-in and account-creation screens were inspected on November 6, 2026. Authenticated workflows, performance, and hiring outcomes have not been verified for this exhibit.']
  ]
 };

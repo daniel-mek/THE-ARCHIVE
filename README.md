@@ -20,7 +20,7 @@ Drag empty space to look around; scroll to move closer or farther. Click physica
 ## Visitor paths
 
 - Entrance → click the welcome plinth → atrium → click gallery doorways or exhibits. Museum view has no persistent menus.
-- JobScout → Inspect exhibit → Read the case study.
+- ApplyOS → Inspect exhibit → Read the case study.
 - Click the physical visitor-information plinth to open the directory. Tab reveals an accessible directory shortcut. Direct access skips the 3D experience.
 - `/?view=direct` opens the recruiter index; `/?project=jobscout` opens the case study directly.
 - Native dialogs support Escape, focus trapping and focus return. Motion follows the operating system setting and can be disabled through the visitor-information directory.
@@ -28,13 +28,13 @@ Drag empty space to look around; scroll to move closer or farther. Click physica
 
 ## Edit the collection
 
-`lib/content.ts` holds the JobScout editorial placeholders. No verified project stack, role, outcomes, résumé, contact links, or employment details were supplied. Replace these before publication. About text is in `components/Archive.tsx`.
+`lib/content.ts` holds the source-backed ApplyOS overview. Public UI captures are in `public/exhibits/applyos`; authenticated workflows and outcomes remain unverified. About text is in `components/Archive.tsx`.
 
 `components/Museum.tsx` contains architecture, lights, kinetic sculpture, camera destinations and exhibit geometry. `app/globals.css` defines the palette and responsive layouts.
 
 ## Prototype scope
 
-Systems is intentionally a future-work gallery. JobScout visuals are illustrative, not screenshots of a verified product. Google Fonts are optional; system fonts work offline. This is a local prototype, not a published production website.
+The Systems gallery presents THIS IS MUSIC using original read-only templates. ApplyOS images are captures of its public sign-in and account-creation screens. Google Fonts are optional; system fonts work offline. This is a local prototype, not a published production website.
 
 ## Visual and camera refinement
 
