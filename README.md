@@ -30,7 +30,7 @@ Drag empty space to look around; scroll to move closer or farther. Click physica
 
 `lib/content.ts` holds the source-backed ApplyOS overview. Public UI captures are in `public/exhibits/applyos`; authenticated workflows and outcomes remain unverified. About text is in `components/Archive.tsx`.
 
-`components/Museum.tsx` contains architecture, lights, kinetic sculpture, camera destinations and exhibit geometry. `app/globals.css` defines the palette and responsive layouts.
+`components/Museum.tsx` contains architecture and gallery interactions. `Daylight.tsx` controls the sun and sky; `BotanicalPlanters.tsx` builds the foliage; `Workbench.tsx` contains the interactive artifacts and oak furniture. `app/globals.css` defines the palette and responsive layouts.
 
 ## Prototype scope
 
@@ -38,4 +38,4 @@ The Systems gallery presents THIS IS MUSIC using original read-only templates. A
 
 ## Visual and camera refinement
 
-The camera uses separate frame-rate-independent damping for gallery travel and direct exploration. Wheel input is normalized across pixel, line, and page devices; background-tab time deltas are capped. Drag sensitivity follows viewport size, and pointer capture is released on completion or cancellation. Lighting uses a locally generated studio environment and three active spotlights; no external HDR asset is needed. Run `pnpm test` with Node.js 22.18+ to validate camera response invariants.
+The camera uses separate frame-rate-independent damping for gallery travel and direct exploration. Wheel input is normalized across pixel, line, and page devices; background-tab time deltas are capped. Drag sensitivity follows viewport size, and pointer capture is released on completion or cancellation. Lighting uses one directional sun, a procedural sky, soft distance-dependent shadows, and a cached near-floor contact-shadow pass. The skylight geometry casts real glazing shadows. Plants use merged curved leaf geometry and the workbench uses procedural oak grain; no external models or HDR assets are needed. Run `pnpm test` with Node.js 22.18+ to validate camera response invariants.
