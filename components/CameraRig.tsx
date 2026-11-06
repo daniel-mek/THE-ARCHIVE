@@ -8,6 +8,7 @@ const UP = new THREE.Vector3(0, 1, 0);
 const views: Record<string, { position: V3; look: V3 }> = {
   entrance: { position: [1.8, 2.15, 9.4], look: [0, 1.9, -3] },
   atrium: { position: [.8, 2.15, 7.8], look: [0, 1.8, -3] },
+  workbench: { position: [.35, 4.1, 3.3], look: [0, 1.25, -2] },
   jobscout: { position: [-5.5, 2.1, -3.4], look: [-6.2, 1.9, -10] },
   systems: { position: [5.4, 2.1, -3.8], look: [6, 2, -11] },
 };

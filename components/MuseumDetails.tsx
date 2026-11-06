@@ -32,28 +32,6 @@ export function DisplayArt({side}:{side:-1|1}) {
   </group>;
 }
 
-// Original folded ribbon geometry: soft color and depth without a downloaded model.
-export function FluentBloom() {
-  const geometry=useMemo(()=>{
-    const g=new THREE.BufferGeometry();const positions:number[]=[];const indices:number[]=[];
-    const steps=112, rows=12;
-    for(let i=0;i<=steps;i++)for(let j=0;j<=rows;j++){
-      const u=i/steps*Math.PI*2,v=j/rows-.5;
-      const radius=1.5+v*.8+.18*Math.sin(u*3);
-      positions.push(radius*Math.cos(u),radius*Math.sin(u),.42*Math.sin(u*2)+v*.55*Math.cos(u*3));
-    }
-    for(let i=0;i<steps;i++)for(let j=0;j<rows;j++){
-      const a=i*(rows+1)+j,b=a+rows+1;indices.push(a,b,a+1,b,b+1,a+1);
-    }
-    g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setIndex(indices);g.computeVertexNormals();return g;
-  },[]);
-  useEffect(()=>()=>geometry.dispose(),[geometry]);
-  return <group position={[0,3,-8.6]} rotation={[.2,-.2,.1]}>
-    {['#4bb7f5','#638aef','#b6b3f4'].map((color,i)=><mesh key={color} geometry={geometry} rotation={[i*.43,i*.45,i*.65]} scale={1-i*.13}>
-      <meshPhysicalMaterial color={color} metalness={.12} roughness={.29} clearcoat={.8} side={THREE.DoubleSide}/>
-    </mesh>)}
-  </group>;
-}
 export function AcrylicWings() {
   return <group>
     {[-1,1].map(side=><group key={side} position={[side*3.45,2.6,-2.1]}>
