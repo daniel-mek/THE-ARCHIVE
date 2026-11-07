@@ -113,7 +113,7 @@ class ArchitecturalAO extends SSAOPass {
   }
 
   override setSize(width: number, height: number) {
-    const scale = Math.min(.65, 1152 / Math.max(width, height));
+    const scale = Math.min(.55, 960 / Math.max(width, height));
     super.setSize(Math.max(1, Math.round(width * scale)), Math.max(1, Math.round(height * scale)));
   }
 
@@ -126,7 +126,7 @@ class ArchitecturalAO extends SSAOPass {
   }
 }
 
-type Pipeline = { composer: EffectComposer; ao: ArchitecturalAO };
+type Pipeline = { composer: EffectComposer; ao: ArchitecturalAO; ratio: number; frames: number; seconds: number };
 
 /** Local contact depth without blooms, vignettes, or a second colour grade. */
 export default function SceneFinish() {
@@ -146,7 +146,7 @@ export default function SceneFinish() {
     composer.addPass(beauty);
     composer.addPass(ao);
     composer.addPass(output);
-    pipeline.current = { composer, ao };
+    pipeline.current = { composer, ao, ratio: 1, frames: 0, seconds: 0 };
     return () => {
       pipeline.current = null;
       beauty.dispose();
@@ -160,14 +160,28 @@ export default function SceneFinish() {
     const current = pipeline.current;
     if (!current) return;
     const ratio = Math.min(gl.getPixelRatio(), 1.5, 2560 / Math.max(size.width, size.height));
+    current.ratio = ratio;
+    current.frames = current.seconds = 0;
     current.composer.setPixelRatio(ratio);
     current.composer.setSize(size.width, size.height);
     current.ao.enabled = size.width >= 650;
   }, [gl, scene, camera, size.width, size.height]);
 
   useFrame((state, delta) => {
-    if (pipeline.current) pipeline.current.composer.render(delta);
-    else state.gl.render(state.scene, state.camera);
+    const current = pipeline.current;
+    if (!current) { state.gl.render(state.scene, state.camera); return; }
+    // Sustained slow frames lower offscreen resolution in small steps, without changing layout.
+    // Ignore background-tab gaps; never oscillate quality during a camera journey.
+    if (delta < .1) { current.frames++; current.seconds += delta; }
+    else current.frames = current.seconds = 0;
+    if (current.frames >= 120) {
+      if (current.seconds / current.frames > .023 && current.ratio > 1) {
+        current.ratio = Math.max(1, current.ratio - .15);
+        current.composer.setPixelRatio(current.ratio);
+      }
+      current.frames = current.seconds = 0;
+    }
+    current.composer.render(delta);
   }, 1);
 
   return null;

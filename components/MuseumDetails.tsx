@@ -17,10 +17,3 @@ export function ArchiveWall() {
     {[-2.7,2.7].map(x=><mesh key={x} position={[x,-1.55,.05]}><boxGeometry args={[.02,1,.025]}/><meshStandardMaterial color="#dbab64" emissive="#d69a52" emissiveIntensity={.5}/></mesh>)}
   </group>;
 }
-export function DisplayArt({side}:{side:-1|1}) {
-  return <group position={[side*9.72,2.5,-.2]} rotation={[0,-side*Math.PI/2,0]}>
-    <RoundedBox args={[2.3,3.2,.12]} radius={.025} castShadow><meshStandardMaterial color="#4c5b4c" metalness={.4} roughness={.4}/></RoundedBox>
-    <mesh position={[0,0,.07]}><planeGeometry args={[2.08,2.98]}/><meshStandardMaterial color={side===-1?'#8bb29b':'#dca77e'} roughness={.95}/></mesh>
-    {[0,1,2,3,4].map(i=><mesh key={i} position={[(i-2)*.24,0,.12]} rotation={[0,0,-.4]}><torusGeometry args={[.45+i*.07,.018,6,48,Math.PI*1.7]}/><meshStandardMaterial color={side===-1?(i%2?'#359e82':'#d2a76b'):(i%2?'#9470d2':'#dfae85')} metalness={.4} roughness={.4}/></mesh>)}
-  </group>;
-}

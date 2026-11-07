@@ -172,6 +172,10 @@ vec4 archiveSurfaceSample(sampler2D surfaceMap) {
   vec3 weight = pow(abs(normalize(vArchiveSurfaceNormal)), vec3(5.0));
   weight /= max(dot(weight, vec3(1.0)), 0.0001);
   vec3 p = vArchiveSurfacePosition * archiveSurfaceScale;
+  // Most architectural pixels are axis-aligned: avoid six redundant texture reads there.
+  if (weight.x > .995) return texture2D(surfaceMap, p.yz * archiveSurfaceRepeat);
+  if (weight.y > .995) return texture2D(surfaceMap, p.xz * archiveSurfaceRepeat);
+  if (weight.z > .995) return texture2D(surfaceMap, p.xy * archiveSurfaceRepeat);
   return texture2D(surfaceMap, p.yz * archiveSurfaceRepeat) * weight.x
        + texture2D(surfaceMap, p.xz * archiveSurfaceRepeat) * weight.y
        + texture2D(surfaceMap, p.xy * archiveSurfaceRepeat) * weight.z;
@@ -222,7 +226,7 @@ function SurfaceMaterial({ kind, color, scale, repeat, bumpScale, roughness, met
         normal = perturbNormalArb(-vViewPosition, normal, archiveHeightGradient, faceDirection);`);
   }, [uniforms]);
 
-  const programKey = useCallback(() => `archive-triplanar-v1-${kind}`, [kind]);
+  const programKey = useCallback(() => `archive-triplanar-v2-${kind}`, [kind]);
 
   return <meshStandardMaterial
     color={color ?? values.color}
