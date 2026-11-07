@@ -11,7 +11,7 @@ export function ArchiveWall() {
     const t=new THREE.CanvasTexture(canvas);t.colorSpace=THREE.SRGBColorSpace;return t;
   },[]);
   useEffect(()=>()=>label.dispose(),[label]);
-  return <group position={[0,4.5,-14.65]}>
+  return <group position={[0,4.5,-14.42]}>
     <RoundedBox args={[5.6,1.65,.13]} radius={.04} castShadow><meshStandardMaterial color="#9b9e8a" roughness={.6}/></RoundedBox>
     <mesh position={[0,0,.08]}><planeGeometry args={[5.4,1.35]}/><meshStandardMaterial map={label} roughness={.8}/></mesh>
     {[-2.7,2.7].map(x=><mesh key={x} position={[x,-1.55,.05]}><boxGeometry args={[.02,1,.025]}/><meshStandardMaterial color="#dbab64" emissive="#d69a52" emissiveIntensity={.5}/></mesh>)}
