@@ -5,7 +5,7 @@ import { Html, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-type Props = { reduced:boolean; active:boolean; onApproach:()=>void; onProject:()=>void; onSystems:()=>void; onExperiments:()=>void };
+type Props = { reduced:boolean; showLabels:boolean; showApproach:boolean; onApproach:()=>void; onProject:()=>void; onSystems:()=>void; onExperiments:()=>void };
 
 function makeOakTexture() {
   const canvas = document.createElement('canvas');
@@ -85,7 +85,7 @@ function makeOakStaves() {
   return geometry;
 }
 
-function Artifact({kind,at,label,onSelect,reduced}:{kind:number;at:[number,number,number];label:string;onSelect:()=>void;reduced:boolean}) {
+function Artifact({kind,at,label,onSelect,reduced,showLabel}:{kind:number;at:[number,number,number];label:string;onSelect:()=>void;reduced:boolean;showLabel:boolean}) {
   const group=useRef<THREE.Group>(null), rotor=useRef<THREE.Group>(null);
   const [hover,setHover]=useState(false);
   const [ready,setReady]=useState(false);
@@ -113,7 +113,7 @@ function Artifact({kind,at,label,onSelect,reduced}:{kind:number;at:[number,numbe
         <mesh><sphereGeometry args={[.11,20,16]}/><meshStandardMaterial color="#e7f3ff" emissive="#8ec7ff" emissiveIntensity={.5}/></mesh>
       </group>}
     </group>
-    {ready&&<Html position={[0,.04,.65]} transform rotation={[-.35,0,0]} scale={.38} distanceFactor={5} zIndexRange={[50,0]}>
+    {ready&&showLabel&&<Html position={[0,.04,.65]} transform rotation={[-.35,0,0]} scale={.38} distanceFactor={5} zIndexRange={[50,0]}>
       <button className={`workbench-label artifact-${kind}`} onFocus={()=>setHover(true)} onBlur={()=>setHover(false)} onPointerEnter={()=>setHover(true)} onPointerLeave={()=>setHover(false)} onClick={onSelect}><small>0{kind+1} / {kind===0?'Project study':kind===1?'Team project':'Future collection'}</small><strong>{label} <span>↗</span></strong></button>
     </Html>}
   </group>;
@@ -142,8 +142,8 @@ export default function Workbench(p:Props){
   <mesh position={[0,1.253,0]} rotation={[-Math.PI/2,0,0]} receiveShadow><circleGeometry args={[2.115,128]}/><meshStandardMaterial map={linoleum} bumpMap={linoleum} bumpScale={.008} roughness={.77}/></mesh>
   <mesh position={[0,1.254,0]} rotation={[-Math.PI/2,0,0]} receiveShadow><ringGeometry args={[2.115,2.125,128]}/><meshStandardMaterial color="#5d6250" roughness={.8}/></mesh>
   <mesh position={[0,1.255,0]} rotation={[Math.PI/2,0,0]} receiveShadow><torusGeometry args={[2.132,.009,8,128]}/><meshStandardMaterial color="#ad9062" metalness={.78} roughness={.34}/></mesh>
-  <Artifact kind={0} at={[-1.15,1.28,-.1]} label="ApplyOS" reduced={p.reduced} onSelect={p.onProject}/>
-  <Artifact kind={1} at={[0,1.28,-.55]} label="THIS IS MUSIC" reduced={p.reduced} onSelect={p.onSystems}/>
-  <Artifact kind={2} at={[1.15,1.28,-.1]} label="Experiments" reduced={p.reduced} onSelect={p.onExperiments}/>
-  {ready&&<Html position={[0,.86,2.28]} transform scale={.5} distanceFactor={5} zIndexRange={[50,0]}><button className="workbench-label workbench-title" onClick={p.onApproach}><small>00 / The workbench</small><strong>{p.active?'Explore an object above':'Ideas taking shape'} <span>↗</span></strong></button></Html>}
+  <Artifact kind={0} at={[-1.15,1.28,-.1]} label="ApplyOS" reduced={p.reduced} showLabel={p.showLabels} onSelect={p.onProject}/>
+  <Artifact kind={1} at={[0,1.28,-.55]} label="THIS IS MUSIC" reduced={p.reduced} showLabel={p.showLabels} onSelect={p.onSystems}/>
+  <Artifact kind={2} at={[1.15,1.28,-.1]} label="Experiments" reduced={p.reduced} showLabel={p.showLabels} onSelect={p.onExperiments}/>
+  {ready&&p.showApproach&&<Html position={[0,.86,2.28]} transform scale={.5} distanceFactor={5} zIndexRange={[50,0]}><button className="workbench-label workbench-title" onClick={p.onApproach}><small>00 / The workbench</small><strong>Ideas taking shape <span>↗</span></strong></button></Html>}
 </group>}

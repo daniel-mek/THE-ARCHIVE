@@ -19,9 +19,9 @@ Drag empty space to look around; scroll to move closer or farther. Click physica
 
 ## Visitor paths
 
-- Entrance → click the welcome plinth → atrium → click gallery doorways or exhibits. Museum view has no persistent menus.
+- Entrance → click the welcome card → atrium → click gallery doorways or exhibits. Museum view has no persistent menus. Contextual controls appear after the camera arrives: workbench object labels at the workbench, project actions and return links only in the active gallery. Seating stays clear of the column-mounted information plaques.
 - ApplyOS → Inspect exhibit → Read the case study.
-- Click the physical visitor-information plinth to open the directory. Tab reveals an accessible directory shortcut. Direct access skips the 3D experience.
+- In the atrium, click the column-mounted visitor-information plaque to open the directory. Tab reveals an accessible directory shortcut. Direct access skips the 3D experience.
 - `/?view=direct` opens the recruiter index; `/?project=jobscout` opens the case study directly.
 - Native dialogs support Escape, focus trapping and focus return. Motion follows the operating system setting and can be disabled through the visitor-information directory.
 - Canvas failures switch to the readable portfolio index. The index works at narrow widths and exposes the same project content.

@@ -17,11 +17,11 @@ const views: Record<string, { position: V3; look: V3 }> = {
   systems: { position: [5.4, 2.1, -3.8], look: [6, 2, -11] },
 };
 
-export default function CameraRig({ room, reduced, explore }: {
-  room: string; reduced: boolean; explore: React.RefObject<Exploration>;
+export default function CameraRig({ room, reduced, explore, onSettledChange }: {
+  room: string; reduced: boolean; explore: React.RefObject<Exploration>; onSettledChange?: (room: string | null) => void;
 }) {
   const rig = useMemo(() => ({
-    key: '', elapsed: 0, duration: 1, initialized: false,
+    key: '', announcedKey: '', elapsed: 0, duration: 1, initialized: false,
     base: new THREE.Vector3(), destination: new THREE.Vector3(), target: new THREE.Vector3(),
     forward: new THREE.Vector3(), matrix: new THREE.Matrix4(),
     fromRotation: new THREE.Quaternion(), rotation: new THREE.Quaternion(), toRotation: new THREE.Quaternion(),
@@ -35,6 +35,7 @@ export default function CameraRig({ room, reduced, explore }: {
     const narrow = size.width < 650;
     const key = `${room}:${narrow}`;
     if (rig.key !== key) {
+      onSettledChange?.(null);
       const view = views[room] || views.atrium;
       rig.destination.set(...view.position);
       rig.target.set(...view.look);
@@ -58,6 +59,11 @@ export default function CameraRig({ room, reduced, explore }: {
     const progress = cinematicEase(rig.elapsed / rig.duration);
     rig.path!.getPointAt(progress, rig.base);
     rig.rotation.slerpQuaternions(rig.fromRotation, rig.toRotation, progress);
+
+    if (rig.elapsed >= rig.duration && rig.announcedKey !== key) {
+      rig.announcedKey = key;
+      onSettledChange?.(room);
+    }
 
     const response = reduced ? 1 : damping(10, dt);
     for (const axis of ['yaw', 'pitch', 'dolly'] as const) {
